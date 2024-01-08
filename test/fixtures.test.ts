@@ -8,9 +8,9 @@ import type { FlatConfigItem, OptionsConfig } from '../src/types';
 beforeAll(async () => {
   await fs.rm('_fixtures', { recursive: true, force: true });
 });
-afterAll(async () => {
-  await fs.rm('_fixtures', { recursive: true, force: true });
-});
+// afterAll(async () => {
+//   await fs.rm('_fixtures', { recursive: true, force: true });
+// });
 
 runWithConfig('js', {
   typescript: false,
