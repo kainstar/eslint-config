@@ -1,9 +1,12 @@
-import * as pluginImport from 'eslint-plugin-i';
-import * as pluginSimpleImportSort from 'eslint-plugin-simple-import-sort';
-
 import type { FlatConfigItem } from '../types';
+import { interopDefault } from '../utils';
 
 export async function imports(): Promise<FlatConfigItem[]> {
+  const [pluginImport, pluginSimpleImportSort] = await Promise.all([
+    interopDefault(import('eslint-plugin-i')),
+    interopDefault(import('eslint-plugin-simple-import-sort')),
+  ] as const);
+
   return [
     {
       name: 'kainstar:imports',

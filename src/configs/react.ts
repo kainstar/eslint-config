@@ -57,7 +57,6 @@ export async function react(options: OptionsOverrides & OptionsFiles = {}): Prom
         'react/no-children-prop': 'error',
         'react/no-danger-with-children': 'error',
         'react/no-deprecated': 'error',
-        'react/no-unescaped-entities': 'error',
         'react/require-render-return': 'error',
         'react/self-closing-comp': 'error',
 
@@ -65,10 +64,10 @@ export async function react(options: OptionsOverrides & OptionsFiles = {}): Prom
         'react/no-direct-mutation-state': 'error',
         'react/no-find-dom-node': 'error',
         'react/no-is-mounted': 'error',
+        'react/no-string-refs': 'error',
 
         // less than React 18
         'react/no-render-return-value': 'error',
-        'react/no-string-refs': 'error',
 
         // overrides
         ...overrides,

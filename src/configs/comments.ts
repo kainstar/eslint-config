@@ -1,8 +1,9 @@
-import pluginEslintComments from 'eslint-plugin-eslint-comments';
-
 import type { FlatConfigItem } from '../types';
+import { interopDefault } from '../utils';
 
 export async function comments(): Promise<FlatConfigItem[]> {
+  const pluginEslintComments = await interopDefault(import('eslint-plugin-eslint-comments'));
+
   return [
     {
       name: 'kainstar:eslint-comments',

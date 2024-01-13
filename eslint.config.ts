@@ -1,10 +1,9 @@
 import kainstar from './src';
 
-export default kainstar(
-  {
-    prettier: true,
-  },
-  {
-    ignores: ['fixtures', '_fixtures'],
-  },
-);
+export default kainstar({
+  custom: [
+    {
+      ignores: ['fixtures', '_fixtures'],
+    },
+  ],
+});

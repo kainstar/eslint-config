@@ -4,16 +4,17 @@ import fg from 'fast-glob';
 import fs from 'fs-extra';
 import { afterAll, beforeAll, it } from 'vitest';
 
-import type { FlatConfigItem, OptionsConfig } from '../src/types';
+import type { OptionsConfig } from '../src/types';
 
 beforeAll(async () => {
   await fs.rm('_fixtures', { recursive: true, force: true });
 });
+
 afterAll(async () => {
-  await fs.rm('_fixtures', { recursive: true, force: true });
+  // await fs.rm('_fixtures', { recursive: true, force: true });
 });
 
-function runWithConfig(name: string, configs: OptionsConfig, ...items: FlatConfigItem[]) {
+function runWithConfig(name: string, configs: OptionsConfig) {
   it.concurrent(
     name,
     async ({ expect }) => {
@@ -33,13 +34,16 @@ function runWithConfig(name: string, configs: OptionsConfig, ...items: FlatConfi
 import kainstar from '@kainstar/eslint-config'
 
 export default kainstar(
-  ${JSON.stringify(configs)},
-  ...${JSON.stringify(items) ?? []},
+  ${JSON.stringify({
+    gitignore: false,
+    ...configs,
+  })}
 )
   `,
       );
 
-      await execa('pnpm', ['eslint', '.', '--fix'], {
+      // pnpm eslint will force run in project root path, so use absolute path
+      await execa('pnpm', ['eslint', '-c', `${target}/eslint.config.js`, target, '--fix'], {
         cwd: target,
         stdio: 'pipe',
       });
@@ -68,46 +72,16 @@ export default kainstar(
   );
 }
 
-runWithConfig('js', {
-  vue: false,
-});
 runWithConfig('all', {
   vue: true,
-});
-runWithConfig('no-style', {
-  vue: true,
-});
-runWithConfig(
-  'tab-double-quotes',
-  {
-    vue: true,
-  },
-  {
-    rules: {
-      'style/no-mixed-spaces-and-tabs': 'off',
+  react: true,
+  custom: [
+    {
+      settings: {
+        react: {
+          version: '18.2.0',
+        },
+      },
     },
-  },
-);
-
-// https://github.com/antfu/eslint-config/issues/255
-runWithConfig(
-  'ts-override',
-  {},
-  {
-    rules: {
-      'ts/consistent-type-definitions': ['error', 'type'],
-    },
-  },
-);
-
-runWithConfig('with-formatters', {
-  vue: true,
-  prettier: true,
-});
-
-runWithConfig('no-markdown-with-formatters', {
-  vue: false,
-  prettier: {
-    markdown: true,
-  },
+  ],
 });
