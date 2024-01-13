@@ -1,6 +1,6 @@
-import type { FlatConfigItem } from '../types';
+import pluginEslintComments from 'eslint-plugin-eslint-comments';
 
-import { pluginEslintComments } from '../untypes-plugins';
+import type { FlatConfigItem } from '../types';
 
 export async function comments(): Promise<FlatConfigItem[]> {
   return [
@@ -13,7 +13,6 @@ export async function comments(): Promise<FlatConfigItem[]> {
         'eslint-comments/no-aggregating-enable': 'error',
         'eslint-comments/no-duplicate-disable': 'error',
         'eslint-comments/no-unlimited-disable': 'error',
-        'eslint-comments/no-unused-disable': 'error',
         'eslint-comments/no-unused-enable': 'error',
       },
     },

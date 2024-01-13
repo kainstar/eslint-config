@@ -8,8 +8,8 @@
       "name": "Debug Current TS File",
       "type": "node",
       "request": "launch",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"],
-      "args": ["${relativeFile}"],
+      "program": "${file}",
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/tsx",
       "cwd": "${workspaceRoot}",
       "skipFiles": ["<node_internals>/**", "node_modules/**"]
     },
@@ -26,3 +26,4 @@
     }
   ]
 }
+

@@ -2,21 +2,71 @@
 
 [![npm package][npm-img]][npm-url] [![Build Status][build-img]][build-url] [![Downloads][downloads-img]][downloads-url] [![Issues][issues-img]][issues-url] [![Code Coverage][codecov-img]][codecov-url] [![Commitizen Friendly][commitizen-img]][commitizen-url] [![Semantic Release][semantic-release-img]][semantic-release-url]
 
-> My awesome module, use my [eslint-config](https://github.com/kainstar/eslint-config/blob/main/QUICK_START.md) as project boilerplate
+ESLint config for Kainstar projects
 
-## Install
+Thanks antfu's [eslint-config](https://github.com/antfu/eslint-config), this project is based on it.
 
-```bash
-npm install @kainstar/eslint-config
-```
+- All plugins as dependencies, don't need to install them manually
+- TypeScript is basic, so remove or off rules that can be checked by the TypeScript compiler.
+- Not check style (should use stylelint) and other file types not used in normal times.
 
 ## Usage
 
-```ts
-import { myPackage } from '@kainstar/eslint-config';
+### Install
 
-myPackage('hello');
-//=> 'hello from my package'
+```bash
+pnpm i -D eslint @kainstar/eslint-config
+```
+
+### Create config file
+
+With [`"type": "module"`](https://nodejs.org/api/packages.html#type) in `package.json` (recommended):
+
+```js
+// eslint.config.js
+import kainstar from '@kainstar/eslint-config';
+
+export default kainstar();
+```
+
+## VS Code support (auto fix)
+
+Install [VS Code ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
+Add the following settings to your `.vscode/settings.json`:
+
+```jsonc
+{
+  // Enable the ESlint flat config support
+  "eslint.experimental.useFlatConfig": true,
+
+  // Auto fix
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never",
+  },
+
+  // Silent the stylish related rules in you IDE, but still auto fix them
+  "eslint.rules.customizations": [
+    { "rule": "prettier/prettier", "severity": "off" },
+    { "rule": "*-indent", "severity": "off" },
+    { "rule": "*-spacing", "severity": "off" },
+    { "rule": "*-order", "severity": "off" },
+    { "rule": "*-newline", "severity": "off" },
+  ],
+
+  // Enable eslint for all supported languages
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "html",
+    "markdown",
+    "yaml",
+  ],
+}
 ```
 
 [build-img]: https://github.com/kainstar/eslint-config/actions/workflows/release.yml/badge.svg

@@ -1,68 +1,16 @@
 import { join, resolve } from 'node:path';
-import { afterAll, beforeAll, it } from 'vitest';
-import fs from 'fs-extra';
 import { execa } from 'execa';
 import fg from 'fast-glob';
+import fs from 'fs-extra';
+import { afterAll, beforeAll, it } from 'vitest';
+
 import type { FlatConfigItem, OptionsConfig } from '../src/types';
 
 beforeAll(async () => {
   await fs.rm('_fixtures', { recursive: true, force: true });
 });
-// afterAll(async () => {
-//   await fs.rm('_fixtures', { recursive: true, force: true });
-// });
-
-runWithConfig('js', {
-  typescript: false,
-  vue: false,
-});
-runWithConfig('all', {
-  typescript: true,
-  vue: true,
-});
-runWithConfig('no-style', {
-  typescript: true,
-  vue: true,
-});
-runWithConfig(
-  'tab-double-quotes',
-  {
-    typescript: true,
-    vue: true,
-  },
-  {
-    rules: {
-      'style/no-mixed-spaces-and-tabs': 'off',
-    },
-  },
-);
-
-// https://github.com/antfu/eslint-config/issues/255
-runWithConfig(
-  'ts-override',
-  {
-    typescript: true,
-  },
-  {
-    rules: {
-      'ts/consistent-type-definitions': ['error', 'type'],
-    },
-  },
-);
-
-runWithConfig('with-formatters', {
-  typescript: true,
-  vue: true,
-  formatters: true,
-});
-
-runWithConfig('no-markdown-with-formatters', {
-  jsx: false,
-  vue: false,
-  markdown: false,
-  formatters: {
-    markdown: true,
-  },
+afterAll(async () => {
+  await fs.rm('_fixtures', { recursive: true, force: true });
 });
 
 function runWithConfig(name: string, configs: OptionsConfig, ...items: FlatConfigItem[]) {
@@ -107,13 +55,59 @@ export default kainstar(
           const source = await fs.readFile(join(from, file), 'utf-8');
           const outputPath = join(output, file);
           if (content === source) {
-            if (fs.existsSync(outputPath)) fs.remove(outputPath);
+            if (fs.existsSync(outputPath)) {
+              fs.remove(outputPath);
+            }
             return;
           }
-          await expect.soft(content).toMatchFileSnapshot(join(output, file));
+          await expect.soft(content).toMatchFileSnapshot(outputPath);
         }),
       );
     },
     30_000,
   );
 }
+
+runWithConfig('js', {
+  vue: false,
+});
+runWithConfig('all', {
+  vue: true,
+});
+runWithConfig('no-style', {
+  vue: true,
+});
+runWithConfig(
+  'tab-double-quotes',
+  {
+    vue: true,
+  },
+  {
+    rules: {
+      'style/no-mixed-spaces-and-tabs': 'off',
+    },
+  },
+);
+
+// https://github.com/antfu/eslint-config/issues/255
+runWithConfig(
+  'ts-override',
+  {},
+  {
+    rules: {
+      'ts/consistent-type-definitions': ['error', 'type'],
+    },
+  },
+);
+
+runWithConfig('with-formatters', {
+  vue: true,
+  prettier: true,
+});
+
+runWithConfig('no-markdown-with-formatters', {
+  vue: false,
+  prettier: {
+    markdown: true,
+  },
+});

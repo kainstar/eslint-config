@@ -1,23 +1,24 @@
-import { interopDefault, parserPlain } from '../utils';
-import type { FlatConfigItem, OptionsFormatters } from '../types';
 import { GLOB_HTML, GLOB_MARKDOWN } from '../globs';
+import type { FlatConfigItem, OptionsPrettier } from '../types';
+import { interopDefault, parserPlain } from '../utils';
 
-export async function formatters(options: OptionsFormatters | true): Promise<FlatConfigItem[]> {
-  const prettier = await interopDefault(import('eslint-plugin-prettier'));
+export async function prettier(options: OptionsPrettier | true): Promise<FlatConfigItem[]> {
+  const pluginPrettier = await interopDefault(import('eslint-plugin-prettier'));
   const eslintConfigPrettier = await interopDefault(import('eslint-config-prettier'));
 
   if (options === true) {
     options = {
       html: true,
       markdown: true,
+      yaml: true,
     };
   }
 
   const configs: FlatConfigItem[] = [
     {
-      name: 'kainstar:formatters:source',
+      name: 'kainstar:prettier:setup',
       plugins: {
-        prettier,
+        prettier: pluginPrettier,
       },
       rules: {
         ...eslintConfigPrettier.rules,
@@ -30,13 +31,10 @@ export async function formatters(options: OptionsFormatters | true): Promise<Fla
 
   if (options.html) {
     configs.push({
-      name: 'kainstar:formatters:html',
+      name: 'kainstar:prettier:html',
       files: [GLOB_HTML],
       languageOptions: {
         parser: parserPlain,
-      },
-      plugins: {
-        prettier,
       },
       rules: {
         'prettier/prettier': [
@@ -51,13 +49,10 @@ export async function formatters(options: OptionsFormatters | true): Promise<Fla
 
   if (options.markdown) {
     configs.push({
-      name: 'kainstar:formatters:markdown',
+      name: 'kainstar:prettier:markdown',
       files: [GLOB_MARKDOWN],
       languageOptions: {
         parser: parserPlain,
-      },
-      plugins: {
-        prettier,
       },
       rules: {
         'prettier/prettier': [
