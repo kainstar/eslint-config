@@ -3,7 +3,7 @@ import process from 'node:process';
 import { isPackageExists } from 'local-pkg';
 
 import { prettier } from './configs/prettier';
-import { comments, ignores, imports, javascript, react, typescript, vitest, vue, yaml } from './configs';
+import { comments, ignores, imports, javascript, markdown, react, typescript, vitest, vue, yaml } from './configs';
 import type { Awaitable, FlatConfigItem, OptionsConfig, OptionsPrettier, UserConfigItem } from './types';
 import { combine, interopDefault } from './utils';
 
@@ -42,6 +42,7 @@ export async function kainstar(options: OptionsConfig = {}): Promise<UserConfigI
     yaml: enableYaml = true,
     prettier: enablePrettier = true,
     vitest: enableVitest = isPackageExists('vitest'),
+    markdown: enableMarkdown = true,
     componentExts = [...(enableVue ? ['vue'] : [])],
     custom: userConfigs = [],
   } = options;
@@ -102,6 +103,16 @@ export async function kainstar(options: OptionsConfig = {}): Promise<UserConfigI
       yaml({
         overrides: getOverrides(options, 'yaml'),
         prettier: getIsEnablePrettier(options, 'yaml'),
+      }),
+    );
+  }
+
+  if (enableMarkdown) {
+    configs.push(
+      markdown({
+        componentExts,
+        overrides: getOverrides(options, 'markdown'),
+        prettier: getIsEnablePrettier(options, 'markdown'),
       }),
     );
   }

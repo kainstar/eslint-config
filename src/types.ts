@@ -88,6 +88,11 @@ export interface OptionsPrettier {
    * Enable formatting support for YAML.
    */
   yaml?: boolean;
+
+  /**
+   * Enable formatting support for JSON.
+   */
+  json?: boolean;
 }
 
 export interface OptionsComponentExts {
@@ -163,6 +168,13 @@ export interface OptionsConfig extends OptionsComponentExts {
    * @default auto-detect based on the dependencies
    */
   react?: boolean | OptionsOverrides;
+
+  /**
+   * Enable markdown support.
+   *
+   * @default true
+   */
+  markdown?: boolean | OptionsOverrides;
 
   /**
    * Use 'prettier' to format files.

@@ -16,7 +16,7 @@ export async function imports(): Promise<FlatConfigItem[]> {
       },
       rules: {
         'import/first': 'error',
-        'import/newline-after-import': ['error', { considerComments: false, count: 1 }],
+        'import/newline-after-import': ['error', { considerComments: true, count: 1 }],
         'import/no-absolute-path': 'error',
         'import/no-duplicates': 'error',
         'import/no-empty-named-blocks': 'error',
