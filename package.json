@@ -14,9 +14,7 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "unbuild",
     "cm": "cz",
@@ -39,11 +37,7 @@
   "engines": {
     "node": ">=18.0"
   },
-  "keywords": [
-    "eslint",
-    "eslint-config",
-    "kainstar"
-  ],
+  "keywords": ["eslint", "eslint-config", "kainstar"],
   "bugs": {
     "url": "https://github.com/kainstar/eslint-config/issues"
   },

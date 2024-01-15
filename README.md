@@ -1,6 +1,6 @@
 # @kainstar/eslint-config
 
-[![npm package][npm-img]][npm-url] [![Build Status][build-img]][build-url] [![Downloads][downloads-img]][downloads-url] [![Issues][issues-img]][issues-url] [![Code Coverage][codecov-img]][codecov-url] [![Commitizen Friendly][commitizen-img]][commitizen-url] [![Semantic Release][semantic-release-img]][semantic-release-url]
+[![npm package][npm-img]][npm-url] [![Build Status][build-img]][build-url] [![Downloads][downloads-img]][downloads-url] [![Issues][issues-img]][issues-url] [![Commitizen Friendly][commitizen-img]][commitizen-url] [![Semantic Release][semantic-release-img]][semantic-release-url]
 
 ESLint config for Kainstar projects
 
@@ -77,8 +77,6 @@ Add the following settings to your `.vscode/settings.json`:
 [npm-url]: https://www.npmjs.com/package/@kainstar/eslint-config
 [issues-img]: https://img.shields.io/github/issues/kainstar/eslint-config
 [issues-url]: https://github.com/kainstar/eslint-config/issues
-[codecov-img]: https://codecov.io/gh/kainstar/eslint-config/branch/main/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/kainstar/eslint-config
 [semantic-release-img]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-release-url]: https://github.com/semantic-release/semantic-release
 [commitizen-img]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
