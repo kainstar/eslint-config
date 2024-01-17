@@ -56,12 +56,7 @@ export async function prettier(options: OptionsPrettier | true): Promise<FlatCon
         parser: parserPlain,
       },
       rules: {
-        'prettier/prettier': [
-          'error',
-          {
-            parser: 'json',
-          },
-        ],
+        'prettier/prettier': 'error',
       },
     });
   }
