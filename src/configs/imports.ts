@@ -23,7 +23,6 @@ export async function imports(): Promise<FlatConfigItem[]> {
         'import/no-mutable-exports': 'error',
         'import/no-named-default': 'error',
         'import/no-self-import': 'error',
-        'import/order': 'error',
 
         // https://dev.to/julioxavierr/sorting-your-imports-with-eslint-3ped
         'simple-import-sort/imports': [

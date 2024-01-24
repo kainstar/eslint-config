@@ -5,5 +5,13 @@
   "tabWidth": 2,
   "semi": true,
   "arrowParens": "always",
-  "proseWrap": "never"
+  "proseWrap": "never",
+  "overrides": [
+    {
+      "files": "**/*.json",
+      "options": {
+        "parser": "json-stringify"
+      }
+    }
+  ]
 }

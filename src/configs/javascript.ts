@@ -53,20 +53,6 @@ export async function javascript(options: OptionsOverrides = {}): Promise<FlatCo
         'no-new-wrappers': 'error',
         'no-octal-escape': 'error',
         'no-proto': 'error',
-        'no-restricted-globals': [
-          'error',
-          { message: 'Use `globalThis` instead.', name: 'global' },
-          { message: 'Use `globalThis` instead.', name: 'self' },
-        ],
-        'no-restricted-properties': [
-          'error',
-          // no-proto rule covers this
-          // { message: 'Use `Object.getPrototypeOf` or `Object.setPrototypeOf` instead.', property: '__proto__' },
-          { message: 'Use `Object.defineProperty` instead.', property: '__defineGetter__' },
-          { message: 'Use `Object.defineProperty` instead.', property: '__defineSetter__' },
-          { message: 'Use `Object.getOwnPropertyDescriptor` instead.', property: '__lookupGetter__' },
-          { message: 'Use `Object.getOwnPropertyDescriptor` instead.', property: '__lookupSetter__' },
-        ],
         'no-self-compare': 'error',
         'no-sequences': 'error',
         'no-throw-literal': 'error',

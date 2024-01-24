@@ -58,7 +58,7 @@ export async function typescript(
           'error',
           {
             assertionStyle: 'as',
-            objectLiteralTypeAssertions: 'allow-as-parameter',
+            objectLiteralTypeAssertions: 'allow',
           },
         ],
         '@typescript-eslint/prefer-literal-enum-member': [
@@ -81,6 +81,7 @@ export async function typescript(
           {
             disallowTypeAnnotations: true,
             prefer: 'type-imports',
+            fixStyle: 'inline-type-imports',
           },
         ],
         '@typescript-eslint/no-dynamic-delete': 'off',
