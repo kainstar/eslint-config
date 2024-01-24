@@ -1,3 +1,11 @@
+## [1.0.1](https://github.com/kainstar/eslint-config/compare/v1.0.0...v1.0.1) (2024-01-24)
+
+
+### Bug Fixes
+
+* adjust imports, javascript, typescript rules ([06fb96b](https://github.com/kainstar/eslint-config/commit/06fb96bf4d076e3d5028abe1864b48a14dbd64ea))
+* not force use 'json' prettier parser for json files ([f0ebf8f](https://github.com/kainstar/eslint-config/commit/f0ebf8f977c62569cbec8a58f1bc187a7627c6cc))
+
 ## 1.0.0 (2024-01-15)
 
 
