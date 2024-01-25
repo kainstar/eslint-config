@@ -1,6 +1,6 @@
 import { isPackageExists } from 'local-pkg';
 
-import { GLOB_JSX, GLOB_TSX } from '../globs';
+import { GLOB_SRC } from '../globs';
 import type { FlatConfigItem, OptionsFiles, OptionsOverrides } from '../types';
 import { interopDefault } from '../utils';
 
@@ -8,7 +8,7 @@ import { interopDefault } from '../utils';
 const ReactRefreshAllowConstantExportPackages = ['vite'];
 
 export async function react(options: OptionsOverrides & OptionsFiles = {}): Promise<FlatConfigItem[]> {
-  const { files = [GLOB_JSX, GLOB_TSX], overrides = {} } = options;
+  const { files = [GLOB_SRC], overrides = {} } = options;
 
   const [pluginReact, pluginReactHooks, pluginReactRefresh] = await Promise.all([
     interopDefault(import('eslint-plugin-react')),
