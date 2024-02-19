@@ -53,7 +53,7 @@ export async function typescript(
             'ts-ignore': 'allow-with-description',
           },
         ],
-        '@typescript-eslint/prefer-ts-expect-error': 'error',
+        '@typescript-eslint/prefer-ts-expect-error': 'off',
         '@typescript-eslint/consistent-type-assertions': [
           'error',
           {
