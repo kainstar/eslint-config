@@ -37,7 +37,10 @@ export async function kainstar(options: OptionsConfig = {}): Promise<UserConfigI
   const {
     vue: enableVue = VuePackages.some((i) => isPackageExists(i)),
     gitignore: enableGitignore = true,
-    isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
+    isInEditor = !!(
+      (process.env.VSCODE_PID || process.env.VSCODE_CWD || process.env.JETBRAINS_IDE || process.env.VIM) &&
+      !process.env.CI
+    ),
     react: enableReact = ReactPackages.some((i) => isPackageExists(i)),
     yaml: enableYaml = true,
     prettier: enablePrettier = true,
