@@ -1,3 +1,19 @@
+## [1.1.0](https://github.com/kainstar/eslint-config/compare/v1.0.2...v1.1.0) (2024-03-01)
+
+
+### Features
+
+* add initialize config cli ([311b968](https://github.com/kainstar/eslint-config/commit/311b9687cfda157e873b2c763fdc84a7ede498e5))
+
+
+### Bug Fixes
+
+* add VSCODE_CWD to check is in editor ([124f4c8](https://github.com/kainstar/eslint-config/commit/124f4c876c8ab7421e71a1db1ec1d30ec04c72c8))
+* close prefer-ts-expect-error rule ([baaab8e](https://github.com/kainstar/eslint-config/commit/baaab8ef8965d696f00b0d783663d3c758204989))
+* install deps even if config file exists ([56ce60e](https://github.com/kainstar/eslint-config/commit/56ce60ed8cb81805c11423c2c1368c0a21c80aa1))
+* upgrade deps ([6b63e1e](https://github.com/kainstar/eslint-config/commit/6b63e1ea4034c6cfc68740a2afc3b5c37fe374d8))
+* use rest params to replace custom option ([c570e4c](https://github.com/kainstar/eslint-config/commit/c570e4c4c2676842c0a1185824dfefef89c9fd8e))
+
 ## [1.0.2](https://github.com/kainstar/eslint-config/compare/v1.0.1...v1.0.2) (2024-01-25)
 
 
