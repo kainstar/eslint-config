@@ -188,6 +188,4 @@ export interface OptionsConfig extends OptionsComponentExts {
    * @default auto-detect based on the process.env
    */
   isInEditor?: boolean;
-
-  custom?: Array<Awaitable<UserConfigItem | UserConfigItem[]>>;
 }

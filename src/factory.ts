@@ -33,7 +33,10 @@ function getIsEnablePrettier(options: OptionsConfig, key: keyof OptionsPrettier)
 /**
  * Construct an array of ESLint flat config items.
  */
-export async function kainstar(options: OptionsConfig = {}): Promise<UserConfigItem[]> {
+export async function kainstar(
+  options: OptionsConfig = {},
+  ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
+): Promise<UserConfigItem[]> {
   const {
     vue: enableVue = VuePackages.some((i) => isPackageExists(i)),
     gitignore: enableGitignore = true,
@@ -47,7 +50,6 @@ export async function kainstar(options: OptionsConfig = {}): Promise<UserConfigI
     vitest: enableVitest = isPackageExists('vitest'),
     markdown: enableMarkdown = true,
     componentExts = [...(enableVue ? ['vue'] : [])],
-    custom: userConfigs = [],
   } = options;
 
   const configs: Array<Awaitable<FlatConfigItem[]>> = [];
