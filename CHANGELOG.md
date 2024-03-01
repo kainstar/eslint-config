@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/kainstar/eslint-config/compare/v1.1.0...v1.1.1) (2024-03-01)
+
+
+### Bug Fixes
+
+* publish _presets dir ([4145c96](https://github.com/kainstar/eslint-config/commit/4145c968c6f723dbef685670bcbe72f7c4605d21))
+
 ## [1.1.0](https://github.com/kainstar/eslint-config/compare/v1.0.2...v1.1.0) (2024-03-01)
 
 
