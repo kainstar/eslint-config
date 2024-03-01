@@ -65,8 +65,8 @@ async function run() {
     } else {
       const eslintConfigContent =
         isESM || isTS
-          ? `import kainstar from '@kainstar/eslint-config';\n\nexport default kainstar();`
-          : `const kainstar = require('@kainstar/eslint-config').default;\n\nmodule.exports = kainstar({});`;
+          ? `import kainstar from '@kainstar/eslint-config';\n\nexport default kainstar();\n`
+          : `const kainstar = require('@kainstar/eslint-config').default;\n\nmodule.exports = kainstar({});\n`;
       fs.writeFileSync(eslintConfigFile, eslintConfigContent, 'utf8');
     }
 

@@ -16,7 +16,8 @@
   "types": "./dist/index.d.ts",
   "bin": "./dist/cli.js",
   "files": [
-    "dist"
+    "dist",
+    "_presets"
   ],
   "scripts": {
     "build": "tsup",
