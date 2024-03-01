@@ -2,13 +2,13 @@
 
 [![npm package][npm-img]][npm-url] [![Build Status][build-img]][build-url] [![Downloads][downloads-img]][downloads-url] [![Issues][issues-img]][issues-url] [![Commitizen Friendly][commitizen-img]][commitizen-url] [![Semantic Release][semantic-release-img]][semantic-release-url]
 
-ESLint config for Kainstar projects
+ESLint config for kainstar projects
 
-Thanks antfu's [eslint-config](https://github.com/antfu/eslint-config), this project is based on it.
+Thanks antfu's [eslint-config](https://github.com/antfu/eslint-config), this project references it a lot, and do some changes to fit my needs.
 
 - All plugins as dependencies, don't need to install them manually
-- TypeScript is basic, so remove or off rules that can be checked by the TypeScript compiler.
-- Not check style (should use stylelint) and other file types not used in normal times.
+- TypeScript is basic, so remove or off some rules that can be checked by the TypeScript compiler.
+- Stop check style (should use stylelint) and other file types not used usually.
 
 ## Usage
 
