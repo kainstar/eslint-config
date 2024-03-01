@@ -8,7 +8,7 @@ interface InitializeConfigOptions {
 }
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
-const presetsDir = path.resolve(__dirname, '../../_presets');
+const presetsDir = path.resolve(__dirname, '../_presets');
 
 async function installDevDependencies(pkg: string | string[]) {
   await import('@antfu/install-pkg').then((i) => i.installPackage(pkg, { dev: true }));
@@ -22,18 +22,20 @@ async function run() {
       name: 'initEslintConfig',
       message: 'Which type of ESLint configuration do you want to initialize?',
       type: 'select',
-      initial: 'ts',
       choices: [
         {
           title: 'JS',
+          description: 'eslint.config.js',
           value: 'js',
         },
         {
           title: 'TS',
+          description: 'eslint.config.ts',
           value: 'ts',
         },
         {
-          title: 'None',
+          title: 'Skip',
+          description: 'Skip this step',
           value: false,
         },
       ],
@@ -60,17 +62,17 @@ async function run() {
     const eslintConfigFile = path.join(cwd, 'eslint.config' + (isTS ? '.ts' : '.js'));
     if (fs.existsSync(eslintConfigFile)) {
       console.warn('ESLint configuration already exists, skip this initialize.');
-      return;
+    } else {
+      const eslintConfigContent =
+        isESM || isTS
+          ? `import kainstar from '@kainstar/eslint-config';\n\nexport default kainstar();`
+          : `const kainstar = require('@kainstar/eslint-config').default;\n\nmodule.exports = kainstar({});`;
+      fs.writeFileSync(eslintConfigFile, eslintConfigContent, 'utf8');
     }
-
-    const eslintConfigContent =
-      isESM || isTS
-        ? `import kainstar from '@kainstar/eslint-config';\n\nexport default kainstar();`
-        : `const kainstar = require('@kainstar/eslint-config').default;\n\nmodule.exports = kainstar({});`;
-    fs.writeFileSync(eslintConfigFile, eslintConfigContent, 'utf8');
 
     const eslintTsPatchDep: string | undefined = pkg.devDependencies?.['eslint-ts-patch'];
     if (options.initEslintConfig === 'ts' && !eslintTsPatchDep) {
+      console.log('Installing eslint-ts-patch...');
       await installDevDependencies(['eslint-ts-patch', 'eslint@npm:eslint-ts-patch']);
     }
   }
@@ -85,14 +87,14 @@ async function run() {
     const prettierConfigFile = path.join(cwd, 'prettier.config.js');
     if (fs.existsSync(prettierConfigFile)) {
       console.warn('Prettier configuration already exists, skip this initialize.');
-      return;
+    } else {
+      const presetPrettierConfigFile = path.join(presetsDir, 'prettier.config.js');
+      await fs.promises.copyFile(presetPrettierConfigFile, prettierConfigFile);
     }
-
-    const presetPrettierConfigFile = path.join(presetsDir, 'prettier.config.js');
-    await fs.promises.copyFile(presetPrettierConfigFile, prettierConfigFile);
 
     const prettierDep: string | undefined = pkg.devDependencies?.['prettier'];
     if (!prettierDep) {
+      console.log('Installing Prettier...');
       await installDevDependencies(['prettier']);
     }
   }
@@ -102,11 +104,7 @@ async function run() {
   }
 }
 
-run()
-  .then(() => {
-    console.log('Configuration initialized.');
-  })
-  .catch((err) => {
-    console.error('Failed to initialize configuration.');
-    console.error(err);
-  });
+run().catch((err) => {
+  console.error('Failed to initialize configuration.');
+  console.error(err);
+});
