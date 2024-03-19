@@ -4,7 +4,7 @@ import { isPackageExists } from 'local-pkg';
 
 import { prettier } from './configs/prettier';
 import { comments, ignores, imports, javascript, markdown, react, typescript, vitest, vue, yaml } from './configs';
-import type { Awaitable, FlatConfigItem, OptionsConfig, OptionsPrettier, UserConfigItem } from './types';
+import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from './types';
 import { combine, interopDefault } from './utils';
 
 const VuePackages = ['vue', 'nuxt', 'vitepress', '@slidev/cli'];
@@ -24,10 +24,6 @@ function getOverrides<K extends keyof OptionsConfig>(options: OptionsConfig, key
   return {
     ...('overrides' in sub ? sub.overrides : {}),
   };
-}
-
-function getIsEnablePrettier(options: OptionsConfig, key: keyof OptionsPrettier) {
-  return typeof options.prettier === 'boolean' ? options.prettier : options.prettier?.[key];
 }
 
 /**
@@ -107,7 +103,6 @@ export async function kainstar(
     configs.push(
       yaml({
         overrides: getOverrides(options, 'yaml'),
-        prettier: getIsEnablePrettier(options, 'yaml'),
       }),
     );
   }
@@ -117,7 +112,6 @@ export async function kainstar(
       markdown({
         componentExts,
         overrides: getOverrides(options, 'markdown'),
-        prettier: getIsEnablePrettier(options, 'markdown'),
       }),
     );
   }

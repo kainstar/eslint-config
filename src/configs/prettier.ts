@@ -1,4 +1,4 @@
-import { GLOB_HTML, GLOB_JSON } from '../globs';
+import { GLOB_HTML, GLOB_JSON, GLOB_MARKDOWN, GLOB_YAML } from '../globs';
 import type { FlatConfigItem, OptionsPrettier } from '../types';
 import { interopDefault, parserPlain } from '../utils';
 
@@ -55,6 +55,31 @@ export async function prettier(options: OptionsPrettier | true): Promise<FlatCon
       languageOptions: {
         parser: parserPlain,
       },
+      rules: {
+        'prettier/prettier': 'error',
+      },
+    });
+  }
+
+  if (options.markdown) {
+    configs.push({
+      name: 'kainstar:prettier:markdown',
+      files: [GLOB_MARKDOWN],
+      rules: {
+        'prettier/prettier': [
+          'error',
+          {
+            parser: 'markdown',
+          },
+        ],
+      },
+    });
+  }
+
+  if (options.yaml) {
+    configs.push({
+      name: 'kainstar:prettier:yaml',
+      files: [GLOB_YAML],
       rules: {
         'prettier/prettier': 'error',
       },

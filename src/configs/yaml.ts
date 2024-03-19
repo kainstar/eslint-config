@@ -2,13 +2,8 @@ import { GLOB_YAML } from '../globs';
 import type { FlatConfigItem, OptionsFiles, OptionsOverrides } from '../types';
 import { interopDefault } from '../utils';
 
-export async function yaml(
-  options: OptionsOverrides &
-    OptionsFiles & {
-      prettier?: boolean;
-    } = {},
-): Promise<FlatConfigItem[]> {
-  const { files = [GLOB_YAML], overrides = {}, prettier = true } = options;
+export async function yaml(options: OptionsOverrides & OptionsFiles = {}): Promise<FlatConfigItem[]> {
+  const { files = [GLOB_YAML], overrides = {} } = options;
 
   const [pluginYml, parserYaml] = await Promise.all([
     interopDefault(import('eslint-plugin-yml')),
@@ -29,8 +24,6 @@ export async function yaml(
         parser: parserYaml,
       },
       rules: {
-        'prettier/prettier': prettier ? 'error' : 'off',
-
         'yml/spaced-comment': 'error',
         'yml/no-empty-document': 'error',
         'yml/no-empty-mapping-value': 'error',

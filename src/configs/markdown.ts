@@ -5,13 +5,9 @@ import type { FlatConfigItem, OptionsComponentExts, OptionsFiles, OptionsOverrid
 import { interopDefault, mapValues, parserPlain } from '../utils';
 
 export async function markdown(
-  options: OptionsFiles &
-    OptionsComponentExts &
-    OptionsOverrides & {
-      prettier?: boolean;
-    } = {},
+  options: OptionsFiles & OptionsComponentExts & OptionsOverrides = {},
 ): Promise<FlatConfigItem[]> {
-  const { componentExts = [], files = [GLOB_MARKDOWN], overrides = {}, prettier = true } = options;
+  const { componentExts = [], files = [GLOB_MARKDOWN], overrides = {} } = options;
 
   const [markdown, pluginTs] = await Promise.all([
     interopDefault(import('eslint-plugin-markdown')),
@@ -26,20 +22,10 @@ export async function markdown(
       },
     },
     {
+      name: 'kainstar:markdown:parser',
       files,
       languageOptions: {
         parser: parserPlain,
-      },
-      name: 'kainstar:markdown:parser',
-      rules: {
-        'prettier/prettier': prettier
-          ? [
-              'error',
-              {
-                parser: 'markdown',
-              },
-            ]
-          : 'off',
       },
     },
     {
