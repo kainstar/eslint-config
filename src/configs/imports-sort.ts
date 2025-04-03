@@ -1,34 +1,16 @@
-import type { FlatConfigItem } from '../types';
-import { interopDefault } from '../utils';
+import type { TypedFlatConfigItem } from '@antfu/eslint-config';
+import { interopDefault } from '@antfu/eslint-config';
 
-export async function imports(): Promise<FlatConfigItem[]> {
-  const [pluginImport, pluginSimpleImportSort] = await Promise.all([
-    interopDefault(import('eslint-plugin-i')),
-    interopDefault(import('eslint-plugin-simple-import-sort')),
-  ] as const);
+export async function importsSort(): Promise<TypedFlatConfigItem[]> {
+  const pluginSimpleImportSort = await interopDefault(import('eslint-plugin-simple-import-sort'))
 
   return [
     {
-      name: 'kainstar:imports',
+      name: 'kainstar:imports-sort',
       plugins: {
-        import: pluginImport,
         'simple-import-sort': pluginSimpleImportSort,
       },
       rules: {
-        'import/first': 'error',
-        'import/newline-after-import': ['error', { considerComments: true, count: 1 }],
-        'import/no-absolute-path': 'error',
-        'import/no-duplicates': [
-          'error',
-          {
-            considerQueryString: true,
-          },
-        ],
-        'import/no-empty-named-blocks': 'error',
-        'import/no-mutable-exports': 'error',
-        'import/no-named-default': 'error',
-        'import/no-self-import': 'error',
-
         // https://dev.to/julioxavierr/sorting-your-imports-with-eslint-3ped
         'simple-import-sort/imports': [
           'error',

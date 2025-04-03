@@ -1,10 +1,3 @@
-import kainstar from './src';
+import { combine, javascript, typescript } from './src';
 
-export default kainstar({}, [
-  {
-    files: ['src/cli.ts'],
-    rules: {
-      'no-console': 'off',
-    },
-  },
-]);
+export default combine(javascript(), typescript());

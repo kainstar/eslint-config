@@ -1,10 +1,15 @@
-import { GLOB_HTML, GLOB_JSON, GLOB_MARKDOWN, GLOB_YAML } from '../globs';
-import type { FlatConfigItem, OptionsPrettier } from '../types';
-import { interopDefault, parserPlain } from '../utils';
+import type { TypedFlatConfigItem } from '@antfu/eslint-config';
+import { GLOB_HTML, GLOB_JSON, GLOB_MARKDOWN, GLOB_YAML, interopDefault, parserPlain } from '@antfu/eslint-config';
 
-export async function prettier(options: OptionsPrettier | true): Promise<FlatConfigItem[]> {
-  const pluginPrettier = await interopDefault(import('eslint-plugin-prettier'));
-  const eslintConfigPrettier = await interopDefault(import('eslint-config-prettier'));
+interface OptionsPrettier {
+  html?: boolean
+  markdown?: boolean
+  yaml?: boolean
+  json?: boolean
+}
+
+export async function prettier(options: OptionsPrettier | true): Promise<TypedFlatConfigItem[]> {
+  const prettierRecommend = await interopDefault(import('eslint-plugin-prettier/recommended'));
 
   if (options === true) {
     options = {
@@ -15,18 +20,10 @@ export async function prettier(options: OptionsPrettier | true): Promise<FlatCon
     };
   }
 
-  const configs: FlatConfigItem[] = [
+  const configs: TypedFlatConfigItem[] = [
     {
+      ...prettierRecommend,
       name: 'kainstar:prettier:setup',
-      plugins: {
-        prettier: pluginPrettier,
-      },
-      rules: {
-        ...eslintConfigPrettier.rules,
-        'prettier/prettier': 'error',
-        'arrow-body-style': 'off',
-        'prefer-arrow-callback': 'off',
-      },
     },
   ];
 
