@@ -8,7 +8,7 @@ interface OptionsPrettier {
   json?: boolean
 }
 
-export async function prettier(options: OptionsPrettier | true): Promise<TypedFlatConfigItem[]> {
+export async function prettier(options: OptionsPrettier | true = true): Promise<TypedFlatConfigItem[]> {
   const prettierRecommend = await interopDefault(import('eslint-plugin-prettier/recommended'));
 
   if (options === true) {
