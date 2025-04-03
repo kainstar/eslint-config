@@ -1,3 +1,9 @@
+## 1.2.0 (2025-04-03)
+
+* refactor: use antfu eslint config as base ([17f1472](https://github.com/kainstar/eslint-config/commit/17f1472))
+* feat: update eslint plugin deps ([79dcada](https://github.com/kainstar/eslint-config/commit/79dcada))
+* fix: move prettier rule together ([faa8af6](https://github.com/kainstar/eslint-config/commit/faa8af6))
+
 ## [1.1.1](https://github.com/kainstar/eslint-config/compare/v1.1.0...v1.1.1) (2024-03-01)
 
 
