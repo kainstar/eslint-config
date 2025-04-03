@@ -1,3 +1,12 @@
+## 2.0.0 (2025-04-03)
+
+* fix(package.json): exports field error ([9862e78](https://github.com/kainstar/eslint-config/commit/9862e78))
+
+
+### BREAKING CHANGE
+
+* use @antfu/eslint-config as base config instead of self build from zero
+
 ## 1.2.0 (2025-04-03)
 
 * refactor: use antfu eslint config as base ([17f1472](https://github.com/kainstar/eslint-config/commit/17f1472))
